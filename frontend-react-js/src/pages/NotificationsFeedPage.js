@@ -1,4 +1,4 @@
-import './HomeFeedPage.css';
+import './NotificationsFeedPage.css';
 import React from "react";
 
 import DesktopNavigation  from '../components/DesktopNavigation';
@@ -10,7 +10,7 @@ import ReplyForm from '../components/ReplyForm';
 // [TODO] Authenication
 import Cookies from 'js-cookie'
 
-export default function HomeFeedPage() {
+export default function NotificationsFeedPage() {
   const [activities, setActivities] = React.useState([]);
   const [popped, setPopped] = React.useState(false);
   const [poppedReply, setPoppedReply] = React.useState(false);
@@ -20,7 +20,7 @@ export default function HomeFeedPage() {
 
   const loadData = async () => {
     try {
-      const backend_url = 'http://localhost:5000/api/activities/home'
+      const backend_url = `http://localhost:5000/api/activities/Notifications`
       const res = await fetch(backend_url, {
         method: "GET"
       });

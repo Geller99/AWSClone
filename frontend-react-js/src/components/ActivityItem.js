@@ -8,17 +8,19 @@ import ActivityActionShare  from '../components/ActivityActionShare';
 
 export default function ActivityItem(props) {
 
+  //TODO: Fix Reply component
   let replies;
   if (props.activity.replies) {
     replies = <div className="replies">
-                {props.activity.replies.map(reply => {
+                {/* {props && props.activity.replies.map(reply => {
                 return  <ActivityItem 
                   setReplyActivity={props.setReplyActivity} 
                   setPopped={props.setPopped} 
                   key={reply.uuid} 
                   activity={reply} 
                   />
-                })}
+                })} */}
+                {console.log("ActivitiyItem", props)}
               </div>
   }
 
@@ -31,7 +33,7 @@ export default function ActivityItem(props) {
         <ActivityActionLike activity_uuid={props.activity.uuid} count={props.activity.likes_count}/>
         <ActivityActionShare activity_uuid={props.activity.uuid} />
       </div>
-      {replies}
+      {replies && replies}
     </div>
   );
 }

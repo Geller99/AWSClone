@@ -8,9 +8,11 @@ export default function ActivityFeed(props) {
         <div className='title'>{props.title}</div>
       </div>
       <div className='activity_feed_collection'>
-        {props.activities.map(activity => {
+        {props && props.activities.map(activity => {
         return  <ActivityItem setReplyActivity={props.setReplyActivity} setPopped={props.setPopped} key={activity.uuid} activity={activity} />
         })}
+
+        {console.log("Props", props)}
       </div>
     </div>
   );
