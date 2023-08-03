@@ -11,10 +11,14 @@ services:
       - ./backend-flask:/backend-flask
   frontend-react-js:
     environment:
+      REACT_APP_AWS_PROJECT_REGION: "${AWS_DEFAULT_REGION}"
+      REACT_APP_AWS_COGNITO_REGION: "${AWS_DEFAULT_REGION}"
+      REACT_APP_AWS_USER_POOLS_ID: "us-east-1_qWkChCZv8"
+      REACT_APP_CLIENT_ID: "5gpv6tv2sv81q1l35r1u4s7rqp"
       REACT_APP_BACKEND_URL: "http://localhost:4567/"
     build: ./frontend-react-js
     ports:
-      - "3000:3000" 
+      - "3000:3000"
     volumes:
       - ./frontend-react-js:/frontend-react-js
 
@@ -25,8 +29,8 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password
     ports:
-      - '5432:5432'
-    volumes: 
+      - "5432:5432"
+    volumes:
       - db:/var/lib/postgresql/data
   dynamodb-local:
     # https://stackoverflow.com/questions/67533058/persist-local-dynamodb-data-in-volumes-lack-permission-unable-to-open-databa
@@ -43,7 +47,7 @@ services:
 
 # the name flag is a hack to change the default prepend folder
 # name when outputting the image names
-networks: 
+networks:
   internal-network:
     driver: bridge
     name: cruddur
@@ -51,4 +55,3 @@ networks:
 volumes:
   db:
     driver: local
-
