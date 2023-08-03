@@ -1,52 +1,47 @@
-import './DesktopNavigation.css';
-import {ReactComponent as Logo} from './svg/logo.svg';
-import DesktopNavigationLink from '../components/DesktopNavigationLink';
-import CrudButton from '../components/CrudButton';
-import ProfileInfo from '../components/ProfileInfo';
+import './DesktopSidebar.css';
+import Search from '../components/Search';
+import TrendingSection from '../components/TrendingsSection'
+import SuggestedUsersSection from '../components/SuggestedUsersSection'
+import JoinSection from '../components/JoinSection'
 
-export default function DesktopNavigation(props) {
+export default function DesktopSidebar(props) {
+  const trendings = [
+    {"hashtag": "100DaysOfCloud", "count": 2053 },
+    {"hashtag": "CloudProject", "count": 8253 },
+    {"hashtag": "AWS", "count": 9053 },
+    {"hashtag": "FreeWillyReboot", "count": 7753 }
+  ]
 
-  let button;
-  let profile;
-  let notificationsLink;
-  let messagesLink;
-  let profileLink;
+  const users = [
+    {"display_name": "Andrew Brown", "handle": "andrewbrown"}
+  ]
+
+  let trending;
   if (props.user) {
-    button = <CrudButton setPopped={props.setPopped} />;
-    profile = <ProfileInfo user={props.user} />;
-    notificationsLink = <DesktopNavigationLink 
-      url="/notifications" 
-      name="Notifications" 
-      handle="notifications" 
-      active={props.active} />;
-    messagesLink = <DesktopNavigationLink 
-      url="/messages"
-      name="Messages"
-      handle="messages" 
-      active={props.active} />
-    profileLink = <DesktopNavigationLink 
-      url="/@andrewbrown" 
-      name="Profile"
-      handle="profile"
-      active={props.active} />
+    trending = <TrendingSection trendings={trendings} />
+  }
+
+  let suggested;
+  if (props.user) {
+    suggested = <SuggestedUsersSection users={users} />
+  }
+  let join;
+  if (props.user) {
+  } else {
+    join = <JoinSection />
   }
 
   return (
-    <nav>
-      <Logo className='logo' />
-      <DesktopNavigationLink url="/" 
-        name="Home"
-        handle="home"
-        active={props.active} />
-      {notificationsLink}
-      {messagesLink}
-      {profileLink}
-      <DesktopNavigationLink url="/#" 
-        name="More" 
-        handle="more"
-        active={props.active} />
-      {button}
-      {profile}
-    </nav>
+    <section>
+      <Search />
+      {trending}
+      {suggested}
+      {join}
+      <footer>
+        <a href="#">About</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Privacy Policy</a>
+      </footer>
+    </section>
   );
 }
